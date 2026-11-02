@@ -1,0 +1,23 @@
+data/
+models/
+*.keras
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+docs/local/
+*.h5
+*.pt
+*.pth
+*.onnx
+*.joblib
+*.pkl
+
+# Local secrets and measurements
+.env
+.env.*
+!.env.example
+docs/local/

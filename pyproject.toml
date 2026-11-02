@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watermark-detector"
+version = "0.2.0"
+description = "Siamese CNN that detects watermarks in images, trained on an Unsplash dataset."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Md Tarek Islam" }]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26",
+    "pillow>=10.1",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+train = ["tensorflow>=2.16"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+wmd-train = "watermark_detector.train:main"
+wmd-predict = "watermark_detector.predict:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

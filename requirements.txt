@@ -1,0 +1,5 @@
+tensorflow>=2.16
+pillow>=10.1
+numpy>=1.26
+requests>=2.31
+pytest>=8
