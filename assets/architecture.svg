@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" role="img" aria-labelledby="t d">
+  <title id="t">Watermark Detector architecture</title>
+  <desc id="d">Photos from the Unsplash API pass through collection, synthetic watermarking, preprocessing and pair batching into a twin shared CNN encoder, an L1 distance and a sigmoid output. Evaluation writes metrics.json. A separate predict command loads the saved model.</desc>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <polygon points="0,1 10,5 0,9" fill="#58a6ff"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <polygon points="0,1 10,5 0,9" fill="#3fb950"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .n { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .f { fill: #161b22; stroke: #58a6ff; stroke-width: 1; }
+    .o { fill: #161b22; stroke: #3fb950; stroke-width: 1; }
+    .p { fill: #e6edf3; font-size: 14px; text-anchor: middle; }
+    .s { fill: #8b949e; font-size: 12px; text-anchor: middle; }
+    .l { fill: #8b949e; font-size: 12px; }
+    .base { fill: none; stroke: #30363d; stroke-width: 1.5; }
+    .flow { fill: none; stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 6 14; animation: pulse 2.4s linear infinite; }
+    .out { fill: none; stroke: #3fb950; stroke-width: 2; stroke-dasharray: 6 14; animation: pulse 2.4s linear infinite; }
+    .d1 { animation-delay: 0s; }
+    .d2 { animation-delay: 0.3s; }
+    .d3 { animation-delay: 0.6s; }
+    .d4 { animation-delay: 0.9s; }
+    .d5 { animation-delay: 1.2s; }
+    .d6 { animation-delay: 1.5s; }
+    .d7 { animation-delay: 1.8s; }
+    .d8 { animation-delay: 2.1s; }
+    @keyframes pulse { from { stroke-dashoffset: 20; } to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .out { animation: none; stroke-dasharray: none; }
+    }
+  </style>
+  <rect width="960" height="420" fill="#0d1117"/>
+
+  <text class="l" x="30" y="40">Training path: wmd-train (train.py)</text>
+
+  <!-- Row 1 nodes -->
+  <rect class="n" x="30" y="70" width="130" height="50" rx="6"/>
+  <text class="p" x="95" y="92">Unsplash API</text>
+  <text class="s" x="95" y="110">landscape photos</text>
+
+  <rect class="n" x="200" y="70" width="150" height="50" rx="6"/>
+  <text class="p" x="275" y="92">unsplash_collector</text>
+  <text class="s" x="275" y="110">450 clean photos</text>
+
+  <rect class="n" x="390" y="70" width="150" height="50" rx="6"/>
+  <text class="p" x="465" y="92">watermark_synth</text>
+  <text class="s" x="465" y="110">PIL text and logo</text>
+
+  <rect class="n" x="580" y="70" width="150" height="50" rx="6"/>
+  <text class="p" x="655" y="92">preprocessing</text>
+  <text class="s" x="655" y="110">128x128 arrays</text>
+
+  <rect class="n" x="770" y="70" width="160" height="50" rx="6"/>
+  <text class="p" x="850" y="92">pairs</text>
+  <text class="s" x="850" y="110">batch 32, 50/50 pairs</text>
+
+  <!-- Row 1 connectors -->
+  <path class="base" d="M160 95 H200"/>
+  <path class="base" d="M350 95 H390"/>
+  <path class="base" d="M540 95 H580"/>
+  <path class="base" d="M730 95 H770"/>
+  <path class="flow d1" d="M160 95 H198" marker-end="url(#ah)"/>
+  <path class="flow d2" d="M350 95 H388" marker-end="url(#ah)"/>
+  <path class="flow d3" d="M540 95 H578" marker-end="url(#ah)"/>
+  <path class="flow d4" d="M730 95 H768" marker-end="url(#ah)"/>
+
+  <!-- Down to row 2 -->
+  <path class="base" d="M850 120 V200"/>
+  <path class="flow d5" d="M850 120 V198" marker-end="url(#ah)"/>
+
+  <!-- Row 2 nodes, right to left -->
+  <rect class="f" x="770" y="200" width="160" height="50" rx="6"/>
+  <text class="p" x="850" y="222">model.py encoder</text>
+  <text class="s" x="850" y="240">twin shared CNN</text>
+
+  <rect class="n" x="580" y="200" width="150" height="50" rx="6"/>
+  <text class="p" x="655" y="222">L1 distance</text>
+  <text class="s" x="655" y="240">|a - b| of embeddings</text>
+
+  <rect class="n" x="390" y="200" width="150" height="50" rx="6"/>
+  <text class="p" x="465" y="222">sigmoid</text>
+  <text class="s" x="465" y="240">same-class score</text>
+
+  <rect class="n" x="200" y="200" width="150" height="50" rx="6"/>
+  <text class="p" x="275" y="222">evaluate</text>
+  <text class="s" x="275" y="240">held-out test pairs</text>
+
+  <rect class="o" x="30" y="200" width="130" height="50" rx="6"/>
+  <text class="p" x="95" y="222">metrics.json</text>
+  <text class="s" x="95" y="240">real predictions</text>
+
+  <!-- Row 2 connectors -->
+  <path class="base" d="M770 225 H730"/>
+  <path class="base" d="M580 225 H540"/>
+  <path class="base" d="M390 225 H350"/>
+  <path class="base" d="M200 225 H160"/>
+  <path class="flow d6" d="M770 225 H732" marker-end="url(#ah)"/>
+  <path class="flow d7" d="M580 225 H542" marker-end="url(#ah)"/>
+  <path class="flow d8" d="M390 225 H352" marker-end="url(#ah)"/>
+  <path class="out d1" d="M200 225 H162" marker-end="url(#ag)"/>
+
+  <!-- Predict branch -->
+  <text class="l" x="30" y="300">Inference path: wmd-predict (predict.py)</text>
+  <path class="base" d="M850 250 V320"/>
+  <path class="flow d2" d="M850 250 V318" marker-end="url(#ah)"/>
+  <text class="l" x="838" y="290" text-anchor="end">saved .keras model</text>
+
+  <rect class="n" x="770" y="320" width="160" height="50" rx="6"/>
+  <text class="p" x="850" y="342">predict</text>
+  <text class="s" x="850" y="360">image plus reference</text>
+
+  <rect class="o" x="560" y="320" width="170" height="50" rx="6"/>
+  <text class="p" x="645" y="342">JSON verdict</text>
+  <text class="s" x="645" y="360">watermarked or clean</text>
+
+  <path class="base" d="M770 345 H730"/>
+  <path class="out d3" d="M770 345 H732" marker-end="url(#ag)"/>
+</svg>
