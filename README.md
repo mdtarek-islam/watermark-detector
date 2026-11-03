@@ -1,4 +1,4 @@
-<p align="center"><img src="./docs/cover-img.webp" alt="Watermark Detector cover" width="100%"></p>
+<p align="center"><img src="./docs/readme-cover-img.webp" alt="Watermark Detector cover" width="100%"></p>
 
 # Watermark Detector
 
