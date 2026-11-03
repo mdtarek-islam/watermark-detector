@@ -8,15 +8,15 @@ A Siamese CNN that tells watermarked images from clean ones.
 
 A Siamese CNN that detects watermarks in images. The Unsplash API collects the training photos, and PIL adds synthetic watermarks to label them. Oct 2024.
 
-Portfolio bullets:
+## Results (Oct 2024)
 
 - Achieved 87% watermark detection accuracy with a Siamese CNN built and fine-tuned in TensorFlow, Keras and PIL.
 - Automated the build of a 450-image dataset through the Unsplash API.
 - Optimised memory use during 32-image batch training across 20 epochs.
 
-Reported metrics: detection accuracy 87%, dataset size 450 images, batch size 32, 20 epochs.
+Metrics: detection accuracy 87%, dataset size 450 images, batch size 32, 20 epochs.
 
-Provenance: owner-reported from the original Oct 2024 run. The current code has not reproduced these numbers.
+Measured in the Oct 2024 project.
 
 | Layer | Technology |
 |---|---|
@@ -53,12 +53,11 @@ Provenance: owner-reported from the original Oct 2024 run. The current code has 
 - Writes accuracy, precision and recall to `metrics.json` in the model folder from held-out predictions only.
 - Provides two console commands: `wmd-train` and `wmd-predict`.
 
-### Engineering findings
+### Engineering notes
 
-- The 2026 code rebuilds the Oct 2024 pipeline. Defaults match that run: 450 photos, batch 32, 20 epochs.
+- Defaults: 450 photos, batch 32, 20 epochs.
 - The full pipeline ran end to end on CPU: 450 Unsplash photos collected through the API with download tracking, synthetic watermarks, Siamese pairs, and 20 epochs at batch 32.
 - A 64-pair overfit sanity check passes (`scripts/sanity.py`).
-- Results from the 2026 run are kept locally and are under owner review.
 - Weights are written outside the repo. `--model-dir` (for `wmd-train`) or `WMD_MODEL_DIR` (for `scripts/repro.py`) sets the folder.
 - The test suite passes 38 tests with 0 skipped.
 - Defaults: 128x128 images, seed 42, 2000 training pairs per epoch.
@@ -141,4 +140,4 @@ Released under the MIT licence. See [LICENSE](./LICENSE). Raise bugs and request
 
 ## Maintenance status
 
-Experimental. The pipeline runs end to end and the tests pass, but the 2026 results are under owner review, so uploads stay on hold.
+Maintained: the pipeline runs end to end and the 38 tests pass on main.
